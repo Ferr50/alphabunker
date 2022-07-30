@@ -1,58 +1,60 @@
-interface Option{
-    title:string,
-    icon:string,
-    alt:string
-};
+import { useState, createContext } from "react";
+import {Transactions, ContextTransactionType} from '../../modals';
+import {TransactionModal, OptionsTransactions} from '../../components'
+
+export const TransactionContext = createContext<ContextTransactionType|null>(null);
 
 const optionsItems = [
     {
         title:"Extrato",
-        icon:"",
+        type:Transactions.Statment,
+        icon:"../../static/img/statment.svg",
         alt:""
     },
     {
         title:"Transferir",
-        icon:"",
+        type:Transactions.Transfer,
+        icon:"../../static/img/transfer.svg",
         alt:""
     },
     {
         title:"Depositar",
-        icon:"",
+        type:Transactions.Deposit,
+        icon:"../../static/img/deposit.svg",
         alt:""
     },
     {
         title:"Sacar",
-        icon:"",
+        type:Transactions.Withdraw,
+        icon:"../../static/img/withdraw.svg",
         alt:""
     }
 ];
 
-
-function Option(props:Option){
-    return (
-        <li>
-            <img src={props.icon} alt={props.alt} />
-            <h3>{props.title}</h3>
-        </li>
-    );
-};
-
-function OptionsTransactions({items}:{items:Option[]}){
-
+function AccountSection(){
     return (
         <section>
-            <ul>
-                {items.map(e=><Option title={e.title} icon={e.icon} alt={e.alt} />)};
-            </ul>
+            <h3>Agência:####-# Conta:#####-#</h3>
+            <h1><span></span> 132.759,30 <span>R$</span></h1>
         </section>
     );
 };
 
 export function Home(){
+    const [typeTransaction, setTypeTransaction] = useState(Transactions.Statment);
+    const myContext = {typeTransaction, setTypeTransaction};
+
     return (
         <>
-            <h2>Bem-vindo, <span></span></h2>
-            <OptionsTransactions items={optionsItems}/>
+            <div>
+                <h2>Bem-vindo, <span></span></h2>
+                <a href=""></a>
+            </div>
+            <TransactionContext.Provider value={myContext}>
+                <OptionsTransactions items={optionsItems}/>
+                <AccountSection />
+                <TransactionModal transaction={typeTransaction} />
+            </TransactionContext.Provider>
         </>
     )
 };
