@@ -1,5 +1,10 @@
+import { useContext } from "react";
+import { LoginContext } from '../pages/login'
+import { LoginModal } from '.'
 
 export function RegisterModal(){
+    const c = useContext(LoginContext);
+    
     return (
         <section>
             <h2>Login</h2>
@@ -11,7 +16,7 @@ export function RegisterModal(){
             <div><input type="password" placeholder="Confirme sua senha" className="text-black" /></div>
             <div><button>Cadastrar</button></div> {/* OnClick */}
             {/* <div><input type="button" value="Cadastrar" /></div> OnClick */}
-            <button>Entrar</button>
+            <button onClick={()=>c!.setState(<LoginModal />)}>Entrar</button>
             {/* <div><input type="button" value="Entrar" /></div> OnClick */}
         </section>
     )
