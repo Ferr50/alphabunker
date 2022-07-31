@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { LoginContext } from '../pages/login'
+import { LoginContext } from "../providers";
 import { LoginModal } from '.'
 
 export function RegisterModal(){

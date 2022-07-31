@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { TransactionContext } from "../pages/home";
+import { TransactionContext } from "../providers";
 import { OptionType } from "../modals";
 
 export function OptionsTransactions({items}:{items:OptionType[]}){

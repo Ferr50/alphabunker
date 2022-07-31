@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { TransactionContext } from "../pages/home";
+import { TransactionContext } from "../providers";
 import {Transactions} from "../modals";
 import {Transfer, Statments, Deposit, Withdraw} from "./";
 

@@ -1,8 +1,7 @@
-import { useState, createContext } from "react";
-import {Transactions, ContextTransactionType} from '../../modals';
-import {TransactionModal, OptionsTransactions} from '../../components'
-
-export const TransactionContext = createContext<ContextTransactionType|null>(null);
+import { useState} from "react";
+import { TransactionContext } from "../../providers";
+import {Transactions} from '../../modals';
+import {TransactionModal, OptionsTransactions, ModalFinishTransaction} from '../../components'
 
 const optionsItems = [
     {
@@ -52,14 +51,15 @@ function Header(){
     return (
         <div className="w-full bg-brand-base relative pb-11 rounded-b-3xl">
             <section className="w-11/12 mx-auto my-0 bg-transparent flex flex-col items-start justify-start text-header-light">
-            <div className="p-4 px-5 text-xl font-medium bg-brand-base flex items-center justify-between w-full">
-                <h2>Bem-vindo, <span>Oscar</span>!</h2>
-                <a href="./profile">
-                    <img className="w-6 mt-1" src="../../static/img/no-user.svg" />
-                </a>
-            </div>
-            <OptionsTransactions items={optionsItems}/>
-            <AccountSection />
+                <div className="p-4 px-5 text-xl font-medium bg-brand-base flex items-center justify-between w-full">
+                    <h2>Bem-vindo, <span>Oscar</span>!</h2>
+                    <a href="./profile">
+                        <img className="w-6 mt-1" src="../../static/img/no-user.svg" />
+                    </a>
+                </div>
+                
+                <OptionsTransactions items={optionsItems}/>
+                <AccountSection />
             </section>  
         </div>
     );
@@ -67,14 +67,24 @@ function Header(){
 
 export function Home(){
     const [typeTransaction, setTypeTransaction] = useState(Transactions.Statment);
+    const [finishModal, setFinishModal] = useState<JSX.Element|string>("");
     const [widthOfMain, setWidthOfMain] = useState("11/12");
-    const myContext = {typeTransaction, setTypeTransaction, widthOfMain, setWidthOfMain};
+
+    const myContext = {
+        typeTransaction,
+        setTypeTransaction,
+        widthOfMain,
+        setWidthOfMain,
+        finishModal,
+        setFinishModal
+    };
 
     return (
         <>
             <TransactionContext.Provider value={myContext}>
                 <Header />
                 <TransactionModal transaction={typeTransaction} />
+                {finishModal}
             </TransactionContext.Provider>
         </>
     )

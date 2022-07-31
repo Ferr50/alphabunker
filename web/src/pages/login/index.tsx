@@ -1,9 +1,7 @@
 import { useState, createContext } from "react";
+import {LoginContext} from '../../providers';
 import { LoginModal } from '../../components/LoginComponent'
 import { RegisterModal } from '../../components/RegisterComponent'
-import { ContextLoginType } from '../../modals'
-
-export const LoginContext = createContext<ContextLoginType|null>(null);
 
 interface loginData {
     cpf: string
