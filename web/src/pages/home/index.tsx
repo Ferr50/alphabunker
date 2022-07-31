@@ -60,7 +60,7 @@ function Header(){
             </div>
             <OptionsTransactions items={optionsItems}/>
             <AccountSection />
-            </section>  
+            </section>
         </div>
     );
 }
