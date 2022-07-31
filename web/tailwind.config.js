@@ -7,6 +7,12 @@ module.exports = {
         brand: ['Inter'],
       },
       colors: {
+        option:{
+          normal: '#75ACB1'
+        },
+        gain:{
+          normal: '#53D496'
+        },
         brand: {
           base: '#338896',
           hover: '#3FA7B8',

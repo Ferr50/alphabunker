@@ -7,5 +7,6 @@
   "private": true,
   "scripts": {
     "dev:web": "cd ./web && yarn dev"
-  }
+  },
+  "devDependencies": {}
 }

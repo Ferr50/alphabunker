@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  @apply m-0 p-0 box-border outline-none;
+  @apply m-0 p-0 box-border outline-none font-brand;
 }
 
 html {
@@ -11,11 +11,13 @@ html {
 }
 
 body {
-  @apply w-screen h-screen flex flex-col justify-center items-center text-base overflow-x-hidden;
+  /* @apply w-screen h-screen flex flex-col justify-start items-start text-base overflow-x-hidden; */
+  @apply w-screen h-screen text-base overflow-x-hidden;
 }
 
 #root {
-  @apply w-screen h-screen flex flex-col justify-center items-center bg-white dark:bg-black text-white;
+  /* @apply w-screen h-screen flex flex-col justify-center items-center bg-white dark:bg-black; */
+  @apply w-screen h-screen bg-body-light-200 dark:bg-black;
 }
 
 ul {
