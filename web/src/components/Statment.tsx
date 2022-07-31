@@ -1,6 +1,6 @@
 export function Statments(){
     return (
-        <div className="bg-body-light-100 p-1 rounded">
+        <div className="dark:bg-body-dark bg-body-light-100 p-1 rounded">
             <StatmentItem />
         </div>
     );

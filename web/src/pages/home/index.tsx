@@ -9,25 +9,29 @@ const optionsItems = [
         title:"Extrato",
         type:Transactions.Statment,
         icon:"../../static/img/statment.svg",
-        alt:""
+        alt:"",
+        width:"11/12"
     },
     {
         title:"Transferir",
         type:Transactions.Transfer,
         icon:"../../static/img/transfer.svg",
-        alt:""
+        alt:"",
+        width:"10/12"
     },
     {
         title:"Depositar",
         type:Transactions.Deposit,
         icon:"../../static/img/deposit.svg",
-        alt:""
+        alt:"",
+        width:"10/12"
     },
     {
         title:"Sacar",
         type:Transactions.Withdraw,
         icon:"../../static/img/withdraw.svg",
-        alt:""
+        alt:"",
+        width:"10/12"
     }
 ];
 
@@ -50,7 +54,7 @@ function Header(){
             <section className="w-11/12 mx-auto my-0 bg-transparent flex flex-col items-start justify-start text-header-light">
             <div className="p-4 px-5 text-xl font-medium bg-brand-base flex items-center justify-between w-full">
                 <h2>Bem-vindo, <span>Oscar</span>!</h2>
-                <a href="">
+                <a href="./profile">
                     <img className="w-6 mt-1" src="../../static/img/no-user.svg" />
                 </a>
             </div>
@@ -63,7 +67,8 @@ function Header(){
 
 export function Home(){
     const [typeTransaction, setTypeTransaction] = useState(Transactions.Statment);
-    const myContext = {typeTransaction, setTypeTransaction};
+    const [widthOfMain, setWidthOfMain] = useState("11/12");
+    const myContext = {typeTransaction, setTypeTransaction, widthOfMain, setWidthOfMain};
 
     return (
         <>
