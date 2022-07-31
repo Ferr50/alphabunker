@@ -1,5 +1,9 @@
-import { LoginModal } from '../../components/LoginModal'
-import { RegisterModal } from '../../components/RegisterModal'
+import { useState, createContext } from "react";
+import { LoginModal } from '../../components/LoginComponent'
+import { RegisterModal } from '../../components/RegisterComponent'
+import { ContextLoginType } from '../../modals'
+
+export const LoginContext = createContext<ContextLoginType|null>(null);
 
 interface loginData {
     cpf: string
@@ -15,6 +19,9 @@ interface clientData {
 }
 
 export function Login() {
+    const [state, setState] = useState(<LoginModal />)
+    const loginContext = { state, setState }
+
     return (
         <>
             <svg width="93" height="104" viewBox="0 0 93 104" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,9 +45,12 @@ export function Login() {
             </svg>
             {/* <img alt="logo" src="logo.svg" /> */}
             <h1>Alpha Bunker</h1>
-            
-            {/* <LoginModal></LoginModal> */}
-            <RegisterModal></RegisterModal>
+            <LoginContext.Provider value ={loginContext}>
+                {state}
+            </LoginContext.Provider>
+
+
+            {/* <RegisterModal></RegisterModal> */}
 
         </>
     )

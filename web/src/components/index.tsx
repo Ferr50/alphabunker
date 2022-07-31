@@ -5,3 +5,6 @@ export {Withdraw} from './Withdraw';
 
 export {TransactionModal} from './TransactionModal';
 export {OptionsTransactions} from './OptionsTransactions';
+
+export {LoginModal} from './LoginComponent'
+export {RegisterModal} from './RegisterComponent'
