@@ -4,5 +4,6 @@ export interface OptionType{
     title:string,
     type:Transactions,
     icon:string,
-    alt:string
+    alt:string,
+    width:string
 };

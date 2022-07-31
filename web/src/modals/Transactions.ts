@@ -1,6 +1,6 @@
 export enum Transactions{
     Statment,
-    Deposit,
     Transfer,
+    Deposit,
     Withdraw
 };
