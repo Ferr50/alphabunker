@@ -6,7 +6,7 @@ export async function loginUserController(req:Request, res:Response){
 
     const hashedPassword = await user.searchByCpf();
     if(!hashedPassword){
-        res.status(404).json({
+        return res.status(404).json({
             status:404,
             error:"Cpf ou senha incorreta"
         });
@@ -24,12 +24,12 @@ export async function loginUserController(req:Request, res:Response){
                 sameSite: 'none'
             }
         );
-        res.status(200).json({
+        return res.status(200).json({
             status:200,
             accounts:await user.getUserAccounts()
         });
     }else{
-        res.status(403).json({
+        return res.status(403).json({
             status:403,
             error:"Cpf ou senha incorreta"
         });

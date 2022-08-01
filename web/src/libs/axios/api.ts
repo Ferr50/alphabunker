@@ -43,10 +43,16 @@ export class ApiRequest{
     public static async login(cpf:string, password:string){
         const body = {cpf,password};
 
-        const response = await ApiRequest.instanceAxios!.post('./users/login', body)
+        const response = await ApiRequest.instanceAxios!.post('./users/login', body);
         response.data.accounts.forEach((e:Account,i:number)=>sessionStorage.setItem(String(i), JSON.stringify(e)));
 
         window.location.replace('./home');
         return;
+    }
+
+    public static async register(name:string, password:string, email:string, cpf:string, birthday:string){
+        const body = {name, password, email, cpf, birthday};
+
+        const response = await ApiRequest.instanceAxios!.post('./users/create', body);
     }
 }
