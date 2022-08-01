@@ -7,7 +7,7 @@ export function RegisterComponent(){
     
     return (
         <section className="flex flex-col justify-center items-center">
-            <h2 className="mt-7 mb-4 text-center text-header-dark dark:text-white">Login</h2>
+            <h2 className="mt-7 mb-4 text-center text-header-dark dark:text-white">Crie sua conta</h2>
             <div><input type="text" placeholder="Digite seu nome" className="text-center mb-3 w-240 p-1 text-btn-text border-2 border-gray-300 placeholder-input-placeholder border-input-b rounded-md dark:text-black" /></div>
             <div><input type="text" placeholder="Data de nascimento" className="text-center mb-3 w-240 p-1 text-btn-text border-2 border-gray-300 placeholder-input-placeholder border-input-b rounded-md dark:text-black" /></div>
             <div><input type="text" placeholder="Digite seu CPF" className="text-center mb-3 w-240 p-1 text-btn-text border-2 border-gray-300 placeholder-input-placeholder border-input-b rounded-md dark:text-black" /></div>
