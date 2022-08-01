@@ -17,7 +17,12 @@ export async function loginUserController(req:Request, res:Response){
         res.cookie(
             "token",
             LoginService.createToken(user.cpf),
-            {expires: new Date(Date.now() + 2*60*1000)}
+            {
+                expires: new Date(Date.now() + 2*60*1000),
+                secure: true,
+                httpOnly: true,
+                sameSite: 'none'
+            }
         );
         res.status(200).json({
             status:200,

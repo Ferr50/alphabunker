@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import cookieParser from "cookie-parser";
 import routeUsers from './routes/users';
 import routeAccounts from './routes/accounts';
@@ -8,6 +9,11 @@ import routesStatments from './routes/statments';
 
 dotenv.config();
 const app = express();
+
+app.use(cors({
+    origin: true,
+    credentials: true,
+}));
 
 app.use(cookieParser());
 app.use(express.json());
