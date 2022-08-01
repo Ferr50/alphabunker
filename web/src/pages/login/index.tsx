@@ -1,7 +1,7 @@
 import { useState, createContext } from "react";
 import {LoginContext} from '../../providers';
-import { LoginModal } from '../../components/LoginComponent'
-import { RegisterModal } from '../../components/RegisterComponent'
+import { LoginComponent } from '../../components/LoginComponent'
+import { RegisterComponent } from '../../components/RegisterComponent'
 
 interface loginData {
     cpf: string
@@ -17,7 +17,7 @@ interface clientData {
 }
 
 export function Login() {
-    const [state, setState] = useState(<LoginModal />)
+    const [state, setState] = useState(<LoginComponent />)
     const loginContext = { state, setState }
 
     return (
