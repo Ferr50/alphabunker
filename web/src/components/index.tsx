@@ -7,7 +7,7 @@ export {TransactionModal} from './TransactionModal';
 export {OptionsTransactions} from './OptionsTransactions';
 export {ModalFinishTransaction} from './ModalFinishTransaction';
 
-export {LoginModal} from './LoginComponent'
-export {RegisterModal} from './RegisterComponent'
+export {LoginComponent} from './LoginComponent'
+export {RegisterComponent} from './RegisterComponent'
 
 export {Button} from './Button';
