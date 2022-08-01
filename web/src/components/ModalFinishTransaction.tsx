@@ -38,7 +38,7 @@ export function ModalFinishTransaction(){
                 <div className="flex items-center justify-center gap-5">
                     <Button 
                         content="Cancelar" 
-                        style="rounded-md text-white text-sm font-medium bg-btn-cancel-base px-10 py-3 pb-2.5"
+                        style="hover:bg-btn-cancel-hover transition-all duration-300 rounded-md text-white text-sm font-medium bg-btn-cancel-base px-10 py-3 pb-2.5"
                         handleEvent={
                             ()=>{
                                 animateTransaction();
@@ -48,7 +48,7 @@ export function ModalFinishTransaction(){
                     />
                     <Button 
                         content="Confirmar" 
-                        style="rounded-md text-white text-sm font-medium bg-btn-primary-base px-10 py-3 pb-2.5"
+                        style="hover:bg-btn-primary-hover transition-all duration-300 rounded-md text-white text-sm font-medium bg-btn-primary-base px-10 py-3 pb-2.5"
                     />
                 </div>
 

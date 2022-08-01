@@ -21,7 +21,7 @@ function Option(props:OptionType){
             <button onClick={()=>{
                 c!.setTypeTransaction(props.type);
                 c!.setWidthOfMain(props.width)
-            }} className="w-14 h-13 bg-option-normal p-3 px-3.5 rounded-md flex items-start justify-center">
+            }} className="hover:bg-option-hover transition-all duration-200 w-14 h-13 bg-option-normal p-3 px-3.5 rounded-md flex items-start justify-center">
                 <img className="h-6" src={props.icon} alt={props.alt} />
             </button>
             <h3 className="text-xs text-center mt-2 font-normal">{props.title}</h3>

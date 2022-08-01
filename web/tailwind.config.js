@@ -9,7 +9,8 @@ module.exports = {
       },
       colors: {
         option:{
-          normal: '#75ACB1'
+          normal: '#75ACB1',
+          hover: '#57AFB7'
         },
         gain:{
           normal: '#53D496'
