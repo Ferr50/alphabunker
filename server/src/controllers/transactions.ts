@@ -16,7 +16,7 @@ async function deposit(req:Request, res:Response){
     if(!transaction.userId){
         return res.status(404).json({
             status:404,
-            error:'Cliente não existe'
+            error:'Cliente não existe ou senha incorreta'
         });
     }
 
@@ -57,7 +57,7 @@ async function withdraw(req:Request, res:Response){
     if(!transaction.userId){
         return res.status(404).json({
             status:404,
-            error:'Cliente não encontrado'
+            error:'Cliente não encontrado  ou senha incorreta'
         });
     }
 
@@ -99,9 +99,9 @@ async function transfer(req:Request, res:Response){
     transaction.destinataryUserId = await transaction.existUser(transaction.userFields.cpf_of_destinatary, transaction.userFields.name_of_destinatary);
 
     if(!transaction.userId || !transaction.destinataryUserId){
-        res.status(404).json({
+        return res.status(404).json({
             status:404,
-            error:'Um dos clientes não existe'
+            error:'Um dos clientes não existe  ou senha incorreta'
         });
     };
 
@@ -109,7 +109,7 @@ async function transfer(req:Request, res:Response){
     transaction.destinataryAccountId = await transaction.existAccount(transaction.destinataryUserId, transaction.accountFields.account_of_destinatary, transaction.accountFields.agency_of_destinatary);
 
     if(!transaction.accountId || !transaction.destinataryAccountId){
-        res.status(404).json({
+        return res.status(404).json({
             status:404,
             error:'Uma das contas não existe'
         });

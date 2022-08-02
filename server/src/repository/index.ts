@@ -32,3 +32,4 @@ export {withdraw} from './transactions/withdraw';
 export {transfer} from './transactions/transfer';
 export {middleware} from './users-accounts/updateAccount';
 export {getAccounts} from './users-accounts/select-all-accounts';
+export {searchUser} from './users-accounts/search-user';

@@ -1,14 +1,16 @@
 import {BodyOfTransaction} from '../models';
 import {connectDB, searchUserByCpf, searchById, searchAccountById} from '../repository';
+import {compare} from 'bcrypt';
 
 class ValidationTransactionFields{
 
     private cpfRegExp = /\d{11}/;
     private nameRegExp = /^[a-z\s]{5,}$/i;
+    private password = '';
 
     error:string = '';
     constructor(depositBody:BodyOfTransaction){
-        
+        this.password = depositBody.password;
     };
 
     parseName = (name:string):string=>{
@@ -20,10 +22,13 @@ class ValidationTransactionFields{
         }, '').trim();
     };
 
+    public checkPassword = (hashedPassword:string) => compare(this.password, hashedPassword);
+
     async existUser(cpf:string, name:string){
         const searchByCpf = await connectDB(cpf, searchUserByCpf);
+        const validPassword = await this.checkPassword(searchByCpf.password);
         
-        if(!searchByCpf.id){
+        if(!(searchByCpf.id && validPassword)){
             return '';
         };
         const searchNameWithId = await connectDB(searchByCpf.id, searchById);

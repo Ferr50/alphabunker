@@ -25,6 +25,7 @@ interface Transfer{
 }
 
 interface BodyOfTransaction{
+    password:string;
     name:string,
     name_of_destinatary?:string,
     cpf:string,
