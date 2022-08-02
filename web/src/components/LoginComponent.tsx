@@ -12,9 +12,12 @@ export function LoginComponent(){
         <section className="flex flex-col justify-center items-center">
             <h2 className="mt-7 mb-4 text-center text-header-dark dark:text-white">Login</h2>
             <div><input type="text" onChange={(e)=>setCpf(e.target.value)} placeholder="Digite seu CPF" className="text-center mb-3 w-240 p-1 text-btn-text border-2 border-gray-300 placeholder-input-placeholder border-input-b rounded-md dark:text-black" /></div>
+            <p className="hidden text-red-600/100 absolute pb-4 text-sm">CPF Inválido</p>
             <div><input type="password" onChange={(e)=>setPassword(e.target.value)} placeholder="Digite sua senha" className="text-center mb-5 w-240 p-1 border-2 border-gray-300 placeholder-input-placeholder text-btn-text rounded-md dark:text-black" /></div>
+            <p className="hidden text-red-600/100 absolute pt-20 text-sm">Senha Inválida</p>
             <div><button onClick={()=>ApiRequest.createInstanceAxios().login(cpf, password)} className="px-24 mb-1 w-240 p-1 text-btn-text rounded-md bg-btn-primary-base hover:bg-btn-primary-hover">Entrar</button></div>
             <div><button className="px-20 w-240 p-0.5 text-center dark:text-input-inactive" onClick={()=>c!.setState(<RegisterComponent/>)}>Crie sua conta</button></div>
+            <p></p>
         </section>
     )
 };
