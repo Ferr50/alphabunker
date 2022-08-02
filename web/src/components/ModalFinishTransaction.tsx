@@ -5,15 +5,18 @@ import { TransactionContext } from "../providers";
 export function ModalFinishTransaction(){
     const c = useContext(TransactionContext);
     const modalRefElement = useRef(null);
+    const backgroundElement = useRef(null);
 
     const animateTransaction = ()=>{
         let o:any = modalRefElement.current!;
-        console.log(1233);
+        let v:any = backgroundElement.current!;
+
+        v.classList.toggle("opacity-0");
         o.classList.toggle("translate-y-full");
     };
 
     return(
-        <div className="absolute top-0 h-screen w-screen bg-[#23292CB2]">
+        <div ref={backgroundElement} className="transition-all opacity-0 duration-500 absolute top-0 h-screen w-screen bg-[#23292CB2]">
             <div className="absolute z-0 h-full w-full" onClick={()=>{
                 animateTransaction();
                 setTimeout(()=>c!.setFinishModal(""),200)}

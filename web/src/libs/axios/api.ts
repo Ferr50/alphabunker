@@ -44,6 +44,8 @@ export class ApiRequest{
         const body = {cpf,password};
 
         const response = await ApiRequest.instanceAxios!.post('./users/login', body);
+
+        localStorage.setItem('name',response.data.name);
         response.data.accounts.forEach((e:Account,i:number)=>sessionStorage.setItem(String(i), JSON.stringify(e)));
 
         window.location.replace('./home');
