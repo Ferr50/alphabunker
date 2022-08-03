@@ -1,9 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { TransactionContext } from "../providers";
 import { ModalFinishTransaction } from ".";
+import { ApiRequest } from "../libs/axios";
 
 export function Withdraw(){
     const c = useContext(TransactionContext);
+    const [value, setValue] = useState('');
+    const [password, setPassword] = useState('');
 
     const getAccount = ()=>`${c!.accountInfo.account}-${c!.accountInfo.account_dv}`;
     const getAgency = ()=>`${c!.accountInfo.agency}-${c!.accountInfo.agency_dv}`;
@@ -24,10 +27,19 @@ export function Withdraw(){
                 </div>
             </section>
 
-            <input className="placeholder:text-input-placeholder text-input-text border border-input-border bg-input-base text-base font-regular px-2 py-1 rounded w-full mt-2" type="number" name="value" id="value-input" placeholder="Valor"/>
-            <input className="placeholder:text-input-placeholder text-input-text border border-input-border bg-input-base text-base font-regular px-2 py-1 rounded w-full mt-4" type="password" name="password" id="password-input" placeholder="Senha"/>
+            <input onChange={(e)=>setValue(e.target.value)} className="placeholder:text-input-placeholder text-input-text border border-input-border bg-input-base text-base font-regular px-2 py-1 rounded w-full mt-2" type="number" name="value" id="value-input" placeholder="Valor"/>
+            <input onChange={(e)=>setPassword(e.target.value)} className="placeholder:text-input-placeholder text-input-text border border-input-border bg-input-base text-base font-regular px-2 py-1 rounded w-full mt-4" type="password" name="password" id="password-input" placeholder="Senha"/>
 
-            <input onClick={(e)=>{e.preventDefault();c!.setFinishModal(<ModalFinishTransaction />)}} className="hover:bg-btn-primary-hover transition-all duration-200 bg-btn-primary-base w-full text-sm font-medium text-white p-3 rounded mt-4" type="submit" value="Sacar" />
+            <input onClick={
+                (e)=>{
+                    const name = localStorage.getItem('name')!; 
+                    const agency = c!.accountInfo.agency + c!.accountInfo.agency_dv;
+                    const account = c!.accountInfo.account + c!.accountInfo.account_dv;
+                    e.preventDefault();
+                    c!.setFinishModal(<ModalFinishTransaction />);
+                    ApiRequest.createInstanceAxios().withdraw(name,agency,account,password,value);
+                }
+            } className="hover:bg-btn-primary-hover transition-all duration-200 bg-btn-primary-base w-full text-sm font-medium text-white p-3 rounded mt-4" type="submit" value="Sacar" />
         </form>
     );
 };

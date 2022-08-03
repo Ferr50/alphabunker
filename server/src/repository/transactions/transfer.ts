@@ -11,21 +11,23 @@ async function transfer(connectedDB:Client, query:Transfer):Promise<any>{
             newValue: (query.value + query.fee)*(-1)
         };
         const queryUpdateAccountDestinatary = {
-            id: query.destinatary_id,
+            agency_of_destinatary:query.agency,
+            account_of_destinatary:query.account,
             newValue: (query.value)
         };
 
-        
-        const updateSenderAccount = await middleware(connectedDB, queryUpdateAccountSender);
-        const updateDestinataryAccount = await middleware(connectedDB, queryUpdateAccountDestinatary);
+        console.log(queryUpdateAccountDestinatary);
+        const updateSenderAccount = await middleware(connectedDB, queryUpdateAccountSender, true);
+        const updateDestinataryAccount = await middleware(connectedDB, queryUpdateAccountDestinatary, false);
 
+        console.log("aqui2", updateSenderAccount, updateDestinataryAccount);
         if(updateDestinataryAccount && updateSenderAccount){
             const insertTransaction = {
                 text:`INSERT INTO transactions
                     (account_id, type, value, fee, timestamp, destinatary_account)
                     VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
                 values: [
-                    query.id, query.type, query.value, query.fee, query.timestamp, query.destinatary_account
+                    query.id, query.type, query.value, query.fee, query.timestamp, updateDestinataryAccount
                 ]
             };
             const t = await connectedDB.query(insertTransaction);

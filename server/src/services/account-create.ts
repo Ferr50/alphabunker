@@ -1,4 +1,4 @@
-import {connectDB, searchUserByCpf, createAccount} from '../repository';
+import {connectDB, searchUserByCpf, getAccounts, createAccount} from '../repository';
 import {Account} from '../models';
 
 class CreateAccount{
@@ -26,6 +26,11 @@ class CreateAccount{
             balance: 0.0
         };
         return account;
+    }
+
+    public async getAccountsOfUser(){
+        const accounts = await connectDB(this.id, getAccounts);
+        return accounts;
     }
 
     async userExists(){

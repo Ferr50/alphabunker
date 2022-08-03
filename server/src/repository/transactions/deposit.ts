@@ -10,7 +10,7 @@ async function deposit(connectedDB:Client, query:Deposit):Promise<any>{
             id: query.id,
             newValue: query.value-query.fee
         }
-        const updateAccount = await middleware(connectedDB, queryForUpdateAccount)
+        const updateAccount = await middleware(connectedDB, queryForUpdateAccount, true)
 
         if(updateAccount){
             const insertTransaction = {

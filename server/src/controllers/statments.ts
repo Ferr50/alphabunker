@@ -1,4 +1,3 @@
-import { Console } from 'console';
 import dotenv from 'dotenv';
 import {Response, Request} from 'express';
 import {verify} from 'jsonwebtoken';
