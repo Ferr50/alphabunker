@@ -17,6 +17,12 @@ export function RegisterComponent(){
     const password2Verify = useRef(null);
     const emailVerify = useRef(null);
     const ageVerify = useRef(null);
+    const [nameBool, setNameBool] = useState('true');
+    const [CPFBool, setCPFBool] = useState('true');
+    const [passwordBool, setPasswordBool] = useState('true');
+    const [password2Bool, setPassword2Bool] = useState('true');
+    const [emailBool, setEmailBool] = useState('true');
+    const [ageBool, setAgeBool] = useState('true');
 
     const validateEmail = (email: string) => {
       const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -49,12 +55,24 @@ export function RegisterComponent(){
       let emailCheck: any = emailVerify.current!;
       let ageCheck: any = ageVerify.current!;
 
-      if (name.length < 3) {
+      if (name.length < 3 && nameBool == 'true') {
           nameCheck.classList.toggle("hidden");
+          setNameBool('false');
+
+      }else if(name.length >= 3 && nameBool == 'false'){
+          nameCheck.classList.toggle("hidden");
+          setNameBool('true');;
       }
-      if (!validateCPF(cpf)) {
-          cpfCheck.classList.toggle("hidden");
+
+      if (!validateCPF(cpf) && CPFBool == 'true') {
+        cpfCheck.classList.toggle("hidden");
+        setCPFBool('false');
+
+      }else if(validateCPF(cpf) && CPFBool == 'false'){
+        cpfCheck.classList.toggle("hidden");
+        setCPFBool('true');;
       }
+
       if (!validatePassword(password)) {
           passCheck.classList.toggle("hidden");
       }
@@ -67,6 +85,7 @@ export function RegisterComponent(){
       if (calcAge(age)<16) {
         ageCheck.classList.toggle("hidden");
       }
+
   };
 
     return (
