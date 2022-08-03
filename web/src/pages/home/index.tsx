@@ -2,9 +2,12 @@ import {useState} from "react";
 import { TransactionContext } from "../../providers";
 import {Transactions} from '../../modals';
 import {TransactionModal, Header, AccountSection} from '../../components'
+import { ApiRequest } from "../../libs/axios";
 
 export function Home(){
     const info = JSON.parse(sessionStorage.getItem('0')!);
+
+    window.onload = (e)=>{ApiRequest.createInstanceAxios().takeCurrentAccounts()};
 
     const [typeTransaction, setTypeTransaction] = useState(Transactions.Statment);
     const [finishModal, setFinishModal] = useState<JSX.Element|string>("");

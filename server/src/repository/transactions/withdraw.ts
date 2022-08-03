@@ -11,7 +11,7 @@ async function withdraw(connectedDB:Client, query:Withdraw):Promise<any>{
             id: query.id,
             newValue: (query.value+query.fee)*(-1)
         };
-        const updateAccount = await middleware(connectedDB, queryForUpdateAccount);
+        const updateAccount = await middleware(connectedDB, queryForUpdateAccount, true);
 
         if(updateAccount){
             const insertTransaction = {

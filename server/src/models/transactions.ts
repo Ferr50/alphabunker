@@ -19,17 +19,18 @@ interface Transfer{
     type:string,
     value:number,
     fee:number,
-    destinatary_account:string,
-    destinatary_id:string,
+    // destinatary_account:string,
+    agency:string,
+    account:string,
     timestamp:string
 }
 
 interface BodyOfTransaction{
     password:string;
     name:string,
-    name_of_destinatary?:string,
+    // name_of_destinatary?:string,
     cpf:string,
-    cpf_of_destinatary?:string,
+    // cpf_of_destinatary?:string,
     agency:string,
     agency_of_destinarary:undefined|string,
     account:string,
