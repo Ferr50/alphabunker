@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {AxiosInstance} from 'axios';
-import { ResponseLogin, Account } from '../../modals';
+import { ResponseLogin, Transactions, Account, TransferRequest, DepositRequest, WithdrawRequest } from '../../modals';
 
 // export const api = axios.create({
 //     baseURL: "http://localhost:5009",
@@ -15,6 +15,11 @@ export class ApiRequest{
     private static withCredentials:boolean = true;
     private static headers:any = { 'Acess-Control-Allow-Origin': '*' };
     private static instanceAxios:AxiosInstance|null = null;
+
+    private static deposityRequest:DepositRequest|null = null;
+    private static withdrawRequest:WithdrawRequest|null = null;
+    private static transferRequest:TransferRequest|null = null;
+    public static typeTransaction:Transactions|null = null;
 
     public static setBaseURL(baseURL:string){
         ApiRequest.baseURL = baseURL;
@@ -40,8 +45,45 @@ export class ApiRequest{
         return ApiRequest;
     }
 
+    public static async manageResquest(){
+        const arr = [null, this.transfer, this.deposit, this.withdraw];
+        if(this.typeTransaction == 0)return;
+        return await arr[this.typeTransaction!]!();
+    }
+
+    public static clearAllBodies(){
+        this.typeTransaction = null;
+        this.clearDepositBody();
+        this.clearTransferBody();
+        this.clearWithdrawBody();
+    }
+
+    public static setDepositBody(name:string, agency:string, account:string, password:string, value:string ){
+        this.deposityRequest = {name, password, agency, account, value};
+        console.log(this.deposityRequest);
+    };
+
+    public static clearDepositBody = ()=>this.deposityRequest = null;
+
+    public static setWithdrawBody(name:string, agency:string, account:string, password:string, value:string){
+        this.withdrawRequest = {name, password, agency, account, value};
+        console.log(this.withdrawRequest);
+    };
+
+    public static clearWithdrawBody = ()=>this.withdrawRequest;
+
+    public static setTransferBody(name:string, agency:string, agency_of_destinatary:string, account:string, account_of_destinatary:string, password:string, value:string){
+        this.transferRequest = {name,agency,agency_of_destinatary,account,account_of_destinatary,password,value};
+        console.log(this.transferRequest);
+    }
+
+    public static clearTransferBody = ()=>this.transferRequest = null;
+
     private static logoutUser(){
+        const theme = localStorage.getItem('theme');
         localStorage.clear();
+
+        localStorage.setItem('theme', (theme||''));
         sessionStorage.clear();
         window.location.replace('/');
     }
@@ -81,8 +123,8 @@ export class ApiRequest{
         window.location.href = './home';
     }
 
-    public static async deposit(name:string, agency:string, account:string, password:string, value:string ){
-        const body = {name, password, agency,account, value, cpf:""};
+    public static async deposit(){
+        const body = {...ApiRequest.deposityRequest, cpf:""};
 
         const response = await ApiRequest.instanceAxios!.post('./transactions/deposit', body);
 
@@ -93,8 +135,10 @@ export class ApiRequest{
         return;
     }
 
-    public static async withdraw(name:string, agency:string, account:string, password:string, value:string){
-        const body = {name, password, agency, account, value, cpf:""};
+    public static async withdraw(){
+        const body = {...ApiRequest.withdrawRequest, cpf:""};
+
+        console.log(body);
 
         const response = await ApiRequest.instanceAxios!.post('./transactions/withdraw', body);
 
@@ -103,18 +147,8 @@ export class ApiRequest{
         return;
     }
 
-    public static async transfer(name:string, agency:string, agencyDestinatary:string, account:string, accountDestinatary:string, password:string, value:string){
-        const body = {
-            name,
-            password,
-            agency,
-            agency_of_destinatary:agencyDestinatary,
-            account,
-            account_of_destinatary:accountDestinatary,
-            value
-        };
-
-        console.log(body);
+    public static async transfer(){
+        const body = {...ApiRequest.transferRequest, cpf:""};
 
         const response = await ApiRequest.instanceAxios!.post('./transactions/transfer', body);
         console.log(response);

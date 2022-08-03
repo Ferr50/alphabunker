@@ -1,6 +1,7 @@
 import { Button } from "./Button";
 import { useContext, useRef } from "react";
 import { TransactionContext } from "../providers";
+import { ApiRequest } from "../libs/axios";
 
 export function ModalFinishTransaction(){
     const c = useContext(TransactionContext);
@@ -28,8 +29,10 @@ export function ModalFinishTransaction(){
                     <img onClick={
                         ()=>{
                             animateTransaction();
-                            setTimeout(()=>c!.setFinishModal(""),200)}
+                            setTimeout(()=>c!.setFinishModal(""),200);
+                            ApiRequest.clearAllBodies();
                         }
+                    }
                     src="../static/img/exit.svg" />
                 </h2>
 
@@ -45,13 +48,19 @@ export function ModalFinishTransaction(){
                         handleEvent={
                             ()=>{
                                 animateTransaction();
-                                setTimeout(()=>c!.setFinishModal(""),200)
+                                setTimeout(()=>c!.setFinishModal(""),200);
+                                ApiRequest.clearAllBodies();
                             }
                         }
                     />
                     <Button 
                         content="Confirmar" 
                         style="hover:bg-btn-primary-hover transition-all duration-300 rounded-md text-white text-sm font-medium bg-btn-primary-base px-10 py-3 pb-2.5"
+                        handleEvent={
+                            ()=>{
+                                ApiRequest.createInstanceAxios().manageResquest();
+                            }
+                        }
                     />
                 </div>
 
