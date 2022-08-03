@@ -1,6 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import { TransactionContext } from "../providers/TransactionContext";
 import { AccountSection } from ".";
+import { ApiRequest } from "../libs/axios";
 
 
 export function SelectAccounts(){
@@ -49,9 +50,14 @@ export function SelectAccounts(){
                 animateTransaction();
                 setTimeout(()=>c!.setAccountsModal(""),200)
             }}></div>
-            <section ref={modalRefElement} className="z-10 bg-white py-4 px-4 rounded-t-3xl absolute bottom-0 w-full transition-all duration-300 translate-y-full">
+            <section ref={modalRefElement} className="z-10 max-h-80 overflow-auto bg-white py-4 px-4 rounded-t-3xl absolute bottom-0 w-full transition-all duration-300 translate-y-full">
                 <h2 className="flex items-center justify-between text-xl font-medium text-paragraph-dark ">
-                    Minhas Contas
+                    <span className="flex items-center">
+                        Minhas Contas
+                        <button onClick={()=>ApiRequest.createInstanceAxios().createAccount()} className="hover:bg-btn-primary-hover ml-2 mt-0.5 p-1.5 rounded-full flex items-center justify-center bg-btn-primary-base">
+                            <img className="w-11/12" src="../static/img/add-account.svg" />
+                        </button>
+                    </span>
                     <button onClick={()=>{
                         animateTransaction();
                         setTimeout(()=>c!.setAccountsModal(""),200);
