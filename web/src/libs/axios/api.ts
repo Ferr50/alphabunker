@@ -123,6 +123,11 @@ export class ApiRequest{
         window.location.href = './home';
     }
 
+    public static createAccount(){
+        const response = ApiRequest.instanceAxios!.post('./accounts/create', {cpf:""});
+        console.log(response);
+    }
+
     public static async deposit(){
         const body = {...ApiRequest.deposityRequest, cpf:""};
 
