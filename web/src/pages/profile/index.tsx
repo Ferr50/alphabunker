@@ -38,14 +38,21 @@ function MyAccount(){
         <img className="w-8 mb-4" src="../../static/img/myAccount.svg" />
         <span className= "text-2xl text-icon-gold ml-4" >Minhas contas correntes</span>
       </div>
-      <div className="h-2/4 mx-4 mb-4 rounded-2xl bg-body-light-100 flex flex-col justify-around text-paragraph-light-200">
-        <span className= "text-l ml-4" >Agencia: 1234-5</span>
-        <span className= "text-l ml-4" >Conta: 12345-6</span>
+      <div className="overflow-y-auto h-56">
+        <div className="h-2/4 mx-4 mb-4 rounded-2xl bg-body-light-100 flex flex-col justify-around text-paragraph-light-200">
+          <span className= "text-l ml-4" >Agencia: 1234-5</span>
+          <span className= "text-l ml-4" >Conta: 12345-6</span>
+        </div>
+        <div className="h-2/4 mx-4 mb-4 rounded-2xl bg-body-light-100 flex flex-col justify-around text-paragraph-light-200">
+          <span className= "text-l ml-4" >Agencia: 1234-5</span>
+          <span className= "text-l ml-4" >Conta: 12345-6</span>
+        </div>
+        <div className="h-2/4 mx-4 mb-4 rounded-2xl bg-body-light-100 flex flex-col justify-around text-paragraph-light-200">
+          <span className= "text-l ml-4" >Agencia: 1234-5</span>
+          <span className= "text-l ml-4" >Conta: 12345-6</span>
+        </div>
       </div>
-      <div className="h-2/4 mx-4 mb-4 rounded-2xl bg-body-light-100 flex flex-col justify-around text-paragraph-light-200">
-        <span className= "text-l ml-4" >Agencia: 1234-5</span>
-        <span className= "text-l ml-4" >Conta: 12345-6</span>
-      </div>
+
     </section>
 )
 };
