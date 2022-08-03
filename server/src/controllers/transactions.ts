@@ -132,7 +132,7 @@ async function transfer(req:Request, res:Response){
     };
 
     const userBody = {...req.body, cpf:decryptedToken.data};
-
+    console.log(req.body);
     const transaction = new TransferService(userBody);
     if(transaction.error){
         return res.status(400).json({
