@@ -25,6 +25,7 @@ class ValidationTransactionFields{
     public checkPassword = (hashedPassword:string) => compare(this.password, hashedPassword);
 
     async existUser(cpf:string, name:string){
+
         const searchByCpf = await connectDB(cpf, searchUserByCpf);
         const validPassword = await this.checkPassword(searchByCpf.password);
         
@@ -43,8 +44,9 @@ class ValidationTransactionFields{
             account:account,
             agency:agency
         };
-        
+
         const search = await connectDB(t, searchAccountById);
+
         if(!search)return '';
 
         return search;

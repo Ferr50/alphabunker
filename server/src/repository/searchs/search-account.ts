@@ -8,9 +8,11 @@ async function searchAccountById(connectedDB:Client, query:any):Promise<string>{
                 WHERE user_id=$1`,
             values:[query.id]
         };
-        
+
         const t = await connectedDB.query(querySearch);
+    
         const arr = t.rows.filter(e=>(e.account+e.account_dv === query.account && e.agency+e.agency_dv === query.agency));
+        console.log(arr);
         result = arr[0].id;
     }finally{
         return result;

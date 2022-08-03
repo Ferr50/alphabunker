@@ -6,9 +6,9 @@ class TransferService extends ValidationTransactionFields{
 
     userFields:{
         name:string,
-        name_of_destinatary:string,
+        // name_of_destinatary:string,
         cpf:string,
-        cpf_of_destinatary:string,
+        // cpf_of_destinatary:string,
         value:number
     };
 
@@ -20,9 +20,9 @@ class TransferService extends ValidationTransactionFields{
     };
 
     userId:string = '';
-    destinataryUserId:string = '';
+    // destinataryUserId:string = '';
     accountId:string = '';
-    destinataryAccountId:string = '';
+    // destinataryAccountId:string = '';
     error:string = '';
     fee:number = 1;
 
@@ -38,9 +38,9 @@ class TransferService extends ValidationTransactionFields{
 
         this.userFields = {
             name:obj.name,
-            name_of_destinatary:obj.name_of_destinatary,
+            // name_of_destinatary:obj.name_of_destinatary,
             cpf:obj.cpf,
-            cpf_of_destinatary:obj.cpf_of_destinatary,
+            // cpf_of_destinatary:obj.cpf_of_destinatary,
             value:obj.value
         };
 
@@ -51,13 +51,13 @@ class TransferService extends ValidationTransactionFields{
             account_of_destinatary:obj.account_of_destinatary
         };
 
-        const {name, name_of_destinatary, cpf, cpf_of_destinatary, value} = this.userFields;
+        const {name, /*name_of_destinatary*/ cpf, /*cpf_of_destinatary*/ value} = this.userFields;
         const {agency, agency_of_destinatary, account, account_of_destinatary} = this.accountFields;
 
         this.userFieldsIsValid({name, cpf, value})
             .accountFieldsIsValid({agency, account});
         
-        this.userFieldsIsValid({name:name_of_destinatary, cpf:cpf_of_destinatary, value})
+        this/*.userFieldsIsValid({name:name_of_destinatary, cpf:cpf_of_destinatary, value})*/
             .accountFieldsIsValid({agency:agency_of_destinatary, account:account_of_destinatary});
 
     };
@@ -68,8 +68,10 @@ class TransferService extends ValidationTransactionFields{
             type:'transfer',
             value:this.userFields.value,
             fee:this.fee,
-            destinatary_account:this.accountFields.account_of_destinatary,
-            destinatary_id:this.destinataryAccountId,
+            // destinatary_account:this.accountFields.account_of_destinatary,
+            agency:this.accountFields.agency_of_destinatary,
+            account:this.accountFields.account_of_destinatary,
+            // destinatary_id:this.destinataryAccountId,
             timestamp: String(Date.now())
         };
         return t;
