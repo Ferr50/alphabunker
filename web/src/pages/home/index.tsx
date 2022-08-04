@@ -1,13 +1,23 @@
 import {useState} from "react";
 import { TransactionContext } from "../../providers";
 import {Transactions} from '../../modals';
-import {TransactionModal, Header, AccountSection} from '../../components'
+import {TransactionModal, Header, AccountSection, StatmentItem} from '../../components'
 import { ApiRequest } from "../../libs/axios";
+
+function SingleComponent(props:any){
+    
+    ApiRequest.createInstanceAxios().statments(props.agency+props.agency_dv,props.account+props.account_dv);
+
+    return <>{Object.entries(JSON.parse(localStorage.getItem('statments')!))
+                    .map(e=><StatmentItem day={e[0]} history={e[1]}/>)}</>;
+}
 
 export function Home(){
     const info = JSON.parse(sessionStorage.getItem('0')!);
 
-    window.onload = (e)=>{ApiRequest.createInstanceAxios().takeCurrentAccounts()};
+    window.onload = (e)=>{
+        ApiRequest.createInstanceAxios().takeCurrentAccounts();
+    };
 
     const [typeTransaction, setTypeTransaction] = useState(Transactions.Statment);
     const [finishModal, setFinishModal] = useState<JSX.Element|string>("");
@@ -21,6 +31,10 @@ export function Home(){
         "agency_dv":info.agency_dv,
     });
 
+    const [listStatments, setListStatments] = useState(
+        <SingleComponent agency={accountInfo.agency} agency_dv={accountInfo.agency_dv} account={accountInfo.account} account_dv={accountInfo.account_dv}/>
+    );
+
     const myContext = {
         typeTransaction,
         setTypeTransaction,
@@ -33,7 +47,9 @@ export function Home(){
         actualAccount,
         setActualAccount,
         accountInfo,
-        setAccountInfo
+        setAccountInfo,
+        listStatments,
+        setListStatments
     };
 
     return (

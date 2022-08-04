@@ -3,6 +3,6 @@ import { statmentsController } from "../controllers";
 
 const routes = Router();
 
-routes.get('/statments', statmentsController);
+routes.post('/statments', statmentsController);
 
 export default routes;

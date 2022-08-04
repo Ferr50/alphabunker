@@ -15,7 +15,7 @@ export function TransactionModal({transaction}:{transaction:Transactions}){
 
     return (
         <section className="h-2/3 flex flex-col items-center justify-center">
-            <div className={`dark:bg-body-dark dark:border-btn-secondary-base dark:border dark:border bg-white p-3 px-4 rounded-lg mt-11 w-${c!.widthOfMain}`}>
+            <div className={`dark:bg-body-dark dark:border-btn-secondary-base dark:border dark:border bg-white p-3 px-4 rounded-lg mt-11 w-${c!.widthOfMain} !max-h-96`}>
                 <h2 className="text-icon-gold font-medium flex text-base mb-6">
                     <img className="mr-2" src={arr[transaction].img} />
                     {arr[transaction].title}

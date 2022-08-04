@@ -1,5 +1,5 @@
 export {Transfer} from './Transfer';
-export {Statments} from './Statment';
+export {Statments, StatmentItem} from './Statment';
 export {Deposit} from './Deposit';
 export {Withdraw} from './Withdraw';
 

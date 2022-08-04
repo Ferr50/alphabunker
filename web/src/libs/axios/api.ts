@@ -92,21 +92,25 @@ export class ApiRequest{
 
         const response = await ApiRequest.instanceAxios!.get('./accounts/all');
 
-        console.log(response.data.error);//Date.now() + 2*60*1000
-        console.log(3);
-
+        
         if(response.data.error == 'logout'){
             return this.logoutUser();
         };
-    
+        
+        sessionStorage.clear();
         response.data.accounts.forEach((e:Account,i:number)=>sessionStorage.setItem(String(i), JSON.stringify(e)));
 
     }
 
-    public static async login(cpf:string, password:string){
+    public static async login(cpf:string, password:string):Promise<any>{
         const body = {cpf,password};
 
         const response = await ApiRequest.instanceAxios!.post('./users/login', body);
+
+        if(response.data.accounts.length == 0){
+            ApiRequest.createAccount();
+            return ApiRequest.login(cpf, password);
+        };
 
         localStorage.setItem('name',response.data.name);
         response.data.accounts.forEach((e:Account,i:number)=>sessionStorage.setItem(String(i), JSON.stringify(e)));
@@ -132,7 +136,7 @@ export class ApiRequest{
         const body = {...ApiRequest.deposityRequest, cpf:""};
 
         const response = await ApiRequest.instanceAxios!.post('./transactions/deposit', body);
-
+        console.log(response);
         await ApiRequest.takeCurrentAccounts();
         window.location.reload();
 
@@ -160,6 +164,31 @@ export class ApiRequest{
 
         await ApiRequest.takeCurrentAccounts();
         window.location.reload();
+        return;
+    };
+
+    public static async statments(agency:string, account:string){
+        const body = {agency, account};
+        console.log(body);
+
+        const response = await ApiRequest.instanceAxios!.post('./statments', body);
+        const arrStatments = response.data.statments||[];
+        console.log("maybe", arrStatments);
+        const obj:any = {};
+        arrStatments.forEach((e:any)=>{
+            const date = new Date(Number(e.timestamp)).toLocaleDateString();
+        
+            if(!obj[date]){
+                obj[date] = [];
+                obj[date].push(e);
+            }else{
+                obj[date].push(e);
+            }
+        });
+
+        // console.log("teste de stringfy", JSON.stringify(obj));
+        await localStorage.setItem("statments", JSON.stringify(obj));
+        // console.log(sessionStorage.getItem("statments"));
         return;
     };
 }

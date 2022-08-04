@@ -12,11 +12,7 @@ export function Deposit(){
     const getAgency = ()=>`${c!.accountInfo.agency}-${c!.accountInfo.agency_dv}`;
     
     const isSubmitAllow = ()=>{
-        console.log(password, value);
-        if(!password||!value)
-            document.getElementById('deposit-submit')!.setAttribute("disabled","true");
-        else
-            document.getElementById('deposit-submit')!.removeAttribute("disabled");
+        return (!password||!value);
     }
     
     return (
@@ -38,7 +34,7 @@ export function Deposit(){
             <input onChange={(e)=>{setValue(e.target.value);isSubmitAllow()}} className="placeholder:text-input-placeholder text-input-text border border-input-border bg-input-base text-base font-regular px-2 py-1 rounded w-full mt-2" type="number" name="value" id="value-input" placeholder="Valor" />
             <input onChange={(e)=>{setPassword(e.target.value);isSubmitAllow()}} className="placeholder:text-input-placeholder text-input-text border border-input-border bg-input-base text-base font-regular px-2 py-1 rounded w-full mt-4" type="password" name="password" id="password-input" placeholder="Senha" />
 
-            <input disabled id="deposit-submit" onClick={(e)=>{
+            <input disabled={isSubmitAllow()} id="deposit-submit" onClick={(e)=>{
                     const name = localStorage.getItem('name')!; 
                     const agency = c!.accountInfo.agency + c!.accountInfo.agency_dv;
                     const account = c!.accountInfo.account + c!.accountInfo.account_dv;
