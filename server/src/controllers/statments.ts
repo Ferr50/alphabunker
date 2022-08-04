@@ -34,8 +34,10 @@ async function statmentsController(req:Request, res:Response){
         });
     }
     
+    console.log("cpf:", decryptedToken.data);
     const existsUser = await connectDB(decryptedToken.data, searchUserByCpf);
-    console.log("PARTONE", decryptedToken.data, existsUser);
+    console.log("exist user:", existsUser);
+    
     if(!existsUser.id){
         return res.status(400).json({
             status:400,
@@ -53,11 +55,16 @@ async function statmentsController(req:Request, res:Response){
 
     const statmentsArr = await connectDB(credentials, statments);
 
-    res.cookie(
-        'token',
-        LoginService.createToken(decryptedToken.cpf),
-        {expires: new Date(Date.now() + 2*60*1000)}
-    );
+    // res.cookie(
+    //     'token',
+    //     LoginService.createToken(decryptedToken.cpf),
+    //     {
+    //         expires: new Date(Date.now() + 2*60*1000),
+    //         secure: true,
+    //         httpOnly: true,
+    //         sameSite: 'none'
+    //     }
+    // );
     
     return res.status(200).json({
         status:200,

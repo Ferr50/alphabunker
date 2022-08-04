@@ -15,12 +15,12 @@ export function LoginComponent() {
     const passInput = useRef(null);
 
     const validateCPF = (cpf: string) => {
-      const regex = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/
+      const regex = /^\d{11}$/;
       return regex.test(cpf)
     };
 
     const validatePassword = (password: string) => {
-      const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#!%])[0-9a-zA-Z$*&@#!%]{8,}$/
+      const regex = /(?=.*[A-Z])(?=.*\d)(?=.*[#@&%!_])(?=^[\w#@%&!]{5,16}$)/gm;
       return regex.test(password)
     };
 

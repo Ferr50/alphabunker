@@ -150,7 +150,7 @@ export function RegisterComponent(){
             <p ref={passwordVerify} className="hidden text-red-600/100 text-xs">Senha deve conter caracteres do tipo Aa1!</p>
             <div><input ref={pass2Input} onChange={(e)=>setPassword2(e.target.value)} type="password" placeholder="Confirme sua senha" className="text-paragraph-dark text-center mb-6 w-240 p-1 border-2 border-gray-300 placeholder-input-placeholder rounded-md dark:text-black" /></div>
             <p ref={password2Verify} className="hidden text-red-600/100 text-xs mb-2">Senhas diferentes</p>
-            <div><button onClick={()=>{ApiRequest.createInstanceAxios().register(name,password,email,cpf,birthdate); ErrorTransaction(cpf, password, email, birthdate, name, password2)}} className="px-20 mb-1 w-240 p-1 text-btn-text rounded-md bg-btn-primary-base hover:bg-btn-primary-hover">Cadastrar</button></div>
+            <div><button onClick={()=>{ApiRequest.createInstanceAxios().register(name,password,email,cpf,birthdate);c!.setState(<LoginComponent />); ErrorTransaction(cpf, password, email, birthdate, name, password2)}} className="px-20 mb-1 w-240 p-1 text-btn-text rounded-md bg-btn-primary-base hover:bg-btn-primary-hover">Cadastrar</button></div>
             <button className="px-24 w-240 p-0.5 text-center dark:text-input-inactive" onClick={()=>c!.setState(<LoginComponent />)}>Entrar</button>
         </section>
     )

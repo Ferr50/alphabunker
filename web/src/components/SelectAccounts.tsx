@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { TransactionContext } from "../providers/TransactionContext";
-import { AccountSection } from ".";
+import { AccountSection, StatmentItem } from ".";
 import { ApiRequest } from "../libs/axios";
 
 
@@ -24,9 +24,9 @@ export function SelectAccounts(){
         };
         return arr.map(e=>
                     <button onClick={
-                            ()=>{
+                            async ()=>{
                                     animateTransaction();
-                                    setTimeout(()=>c!.setAccountsModal(""),200)
+                                    setTimeout(()=>c!.setAccountsModal(""),200);
                                     c!.setAccountInfo({
                                         account:e.account,
                                         account_dv:e.account_dv,
@@ -35,7 +35,12 @@ export function SelectAccounts(){
                                     });
                                     c!.setActualAccount(
                                     <AccountSection haveMoreButton={true} account={e.account} account_dv={e.account_dv} agency={e.agency} agency_dv={e.agency_dv} balance={e.balance} display={"absolute"} />
-                                )
+                                    );
+                                    
+                                    await ApiRequest.createInstanceAxios().statments(e.agency+e.agency_dv, e.account+e.account_dv);
+                            
+                                    c!.setListStatments(<>{Object.entries(JSON.parse(localStorage.getItem('statments')!))
+                                    .map(e=><StatmentItem day={e[0]} history={e[1]}/>)}</>);
                             }
                         } 
                         className=" w-full [&>*]:hover:bg-input-base [&>*]:w-full mt-3 [&>*]:!translate-x-0">

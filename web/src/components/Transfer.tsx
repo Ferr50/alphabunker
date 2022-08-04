@@ -15,10 +15,7 @@ export function Transfer(){
     const getAgency = ()=>`${c!.accountInfo.agency}-${c!.accountInfo.agency_dv}`;
 
     const isSubmitAllow = ()=>{
-        if(!password||!value)
-            document.getElementById('transfer-submit')!.setAttribute("disabled","true");
-        else
-            document.getElementById('transfer-submit')!.removeAttribute("disabled");
+        return (!password||!value);
     }
 
     return(
@@ -54,7 +51,7 @@ export function Transfer(){
             <input onChange={(e)=>{setValue(e.target.value);isSubmitAllow()}} className="placeholder:text-input-placeholder text-input-text border border-input-border bg-input-base text-base font-regular px-2 py-1 rounded w-full mt-2" type="number" name="value" id="value-input" placeholder="Valor" />
             <input onChange={(e)=>{setPassword(e.target.value);isSubmitAllow()}} className="placeholder:text-input-placeholder text-input-text border border-input-border bg-input-base text-base font-regular px-2 py-1 rounded w-full mt-4" type="password" name="password" id="password-input" placeholder="Senha" />
 
-            <input id="transfer-submit" disabled onClick={
+            <input id="transfer-submit" disabled={isSubmitAllow()} onClick={
                 (e)=>{
                     e.preventDefault();
                     c!.setFinishModal(<ModalFinishTransaction />);

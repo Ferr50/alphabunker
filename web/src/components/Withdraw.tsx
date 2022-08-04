@@ -13,10 +13,7 @@ export function Withdraw(){
     const getAgency = ()=>`${c!.accountInfo.agency}-${c!.accountInfo.agency_dv}`;
 
     const isSubmitAllow = ()=>{
-        if(!password||!value)
-            document.getElementById('withdraw-submit')!.setAttribute("disabled","true");
-        else
-            document.getElementById('withdraw-submit')!.removeAttribute("disabled");
+        return (!password||!value);
     }
 
     return (
@@ -38,7 +35,7 @@ export function Withdraw(){
             <input onChange={(e)=>{setValue(e.target.value);isSubmitAllow()}} className="placeholder:text-input-placeholder text-input-text border border-input-border bg-input-base text-base font-regular px-2 py-1 rounded w-full mt-2" type="number" name="value" id="value-input" placeholder="Valor"/>
             <input onChange={(e)=>{setPassword(e.target.value);isSubmitAllow()}} className="placeholder:text-input-placeholder text-input-text border border-input-border bg-input-base text-base font-regular px-2 py-1 rounded w-full mt-4" type="password" name="password" id="password-input" placeholder="Senha"/>
 
-            <input id="withdraw-submit" disabled onClick={
+            <input id="withdraw-submit" disabled={isSubmitAllow()} onClick={
                 (e)=>{
                     const name = localStorage.getItem('name')!; 
                     const agency = c!.accountInfo.agency + c!.accountInfo.agency_dv;

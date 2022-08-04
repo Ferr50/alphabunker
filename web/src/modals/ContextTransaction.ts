@@ -23,4 +23,6 @@ export interface ContextTransactionType{
         agency: any;
         agency_dv: any;
     }>>;
+    listStatments: JSX.Element;
+    setListStatments: React.Dispatch<React.SetStateAction<JSX.Element>>
 }
